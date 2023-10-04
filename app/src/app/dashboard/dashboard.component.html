@@ -1,0 +1,62 @@
+<div class="body">
+
+    <div class="action_btn">
+
+    <button class="action_btn" (click)="showProfile()"> < back </button>
+    </div>  
+    <progress *ngIf="isLoading" class="loading">Loading...</progress>
+    <div *ngIf="repo">
+        <ng-container>
+            <div class="bg-white shadow-sm p-3">
+                <h2>All Public Repository Details</h2>
+            </div>
+        </ng-container>
+        <div *ngFor="let data of publicRepositories">
+            <div class="timeline-panel">
+                <div class="timeline-heading">
+                    <h3 class="timeline-title">{{data.name}}</h3>
+                    <span class="company">Size - {{data.size}}</span>
+                </div>
+                <div class="timeline-body">
+                    <p>
+                        <span><b>Owner - </b> {{data.owner}}</span><br>
+                    </p>
+                    <a href="#" (click)="getRepoDetailsByGraphql(data.name)">Click here for more details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="repoDetails">
+        <h2>Git Repository Details </h2>
+        <form>				
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Repository Name" value="Repo Name - {{completeRepoDetails?.name}}" readonly="">
+            </div>
+        
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Repository Size" value="Repo Size - {{completeRepoDetails?.size}} {{completeRepoDetails?.size ? 'KB' : ''}}" readonly="">
+            </div>				
+        
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Repository Private" value="Repo Type - {{completeRepoDetails?.private ? 'Private' : 'Public'}} " readonly="">
+            </div>
+                        
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Repository Owner" value="Repo Owner -  {{completeRepoDetails?.owner}}" readonly="">
+            </div>
+                        
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Hooks Url" value="Repo Hook Active - {{completeRepoDetails?.hooks_url ? 'Yes' : 'No'}}" readonly="">
+            </div>
+
+            <div class="col-md-12">
+                <input class="repo-field" type="text" placeholder="Number of files in the repo" value="No Of Files - {{completeRepoDetails?.fileCount}}" readonly="">
+            </div>
+        
+            <div class="col-md-12">
+                <span>Content In Read Me file - </span>
+                <textarea  class="repo-text" name="contact_message" id="contact_message" cols="30" rows="10" placeholder="File Content">{{completeRepoDetails?.ymlContent}}</textarea>
+            </div>
+        </form>	
+    </div>
+</div>

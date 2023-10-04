@@ -17,14 +17,14 @@ interface RepoData {
 const getRepoDetail = async (repoName: string): Promise<RepoData | null> => {
     try {
         console.log("repoName : ",repoName);
-        // const repoPath = path.join(repoDir, repoName);
-        const repoPath = 'D:/0GitHubScrapper/git-scanner-main/repos/repoA/**/*';
+        const repoPath = path.join(repoDir, repoName);
+        // const repoPath = `D:/0GitHubScrapper/git-scanner-main/repos/`+repoName+`/**/*`;
         console.log("repoDir : ",repoDir);
         console.log("repoPath : ",repoPath);
-        console.log("path.join(repoPath, '**/*') : ",path.join(repoPath, '**/*'));
+        // console.log("path.join(repoPath, '**/*') : ",path.join(repoPath, '**/*'));
 
-        const files = await glob(repoPath);
-        // const files = await glob(path.join(repoPath, '**/*'));
+        // const files = await glob(repoPath);
+        const files = await glob(path.join(repoPath, '**/*'));
         console.log("files : ",files);
 
         const ymlFile = files.find((file) => file.endsWith(".yml"));

@@ -33,14 +33,14 @@ export class DashboardComponent implements OnInit{
     this.repoDetails = false;
   }
 
-  async getRepoDetailsByGraphql(param:any){
+  async getRepoDetailsByGraphql(owner:any,name:any){
     this.repo = false
     this.profile = false
     this.repoDetails = true;
     this.isLoading = true;
     this.completeRepoDetails = null;
-    console.log("getRepoDetailsByGraphql : ",param);
-    this.completeRepoDetails = await this.apiService.getRepoDetailsByGraphql(param);
+    console.log("getRepoDetailsByGraphql : ",name);
+    this.completeRepoDetails = await this.apiService.getRepoDetailsByGraphql(owner,name);
     this.isLoading = false;
     console.log("this.completeRepoDetails : ",this.completeRepoDetails);
  }

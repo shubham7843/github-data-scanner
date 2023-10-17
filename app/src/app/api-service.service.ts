@@ -13,7 +13,7 @@ export class ApiServiceService {
   async getPublicRepositoriesByGraphql(){
     try{      
       const graphqlQuery = {
-        query: 'query listRepo { listRepo { name size owner __typename } }',
+        query: 'query Repositories { repositories { name size owner __typename } }',
       };
       return fetch('http://localhost:4000/', {
         method: 'POST',
@@ -25,7 +25,7 @@ export class ApiServiceService {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          return data?.data.listRepo;
+          return data?.data.repositories;
         })
         .catch((error) => {
           console.error(error);
@@ -35,12 +35,13 @@ export class ApiServiceService {
     }
   }
 
-  async getRepoDetailsByGraphql(param:any){
+  async getRepoDetailsByGraphql(owner:any,name:any){
     try{      
       const graphqlQuery = {
-        query: 'query RepoDetails($repoName: String!) { repoDetails(repoName: $repoName) { name private fileCount owner size isWebhook ymlContent __typename } }',
+        query: 'query RepositoryDetails($owner: String!, $name: String!) { repositoryDetails(owner: $owner, name: $name) { name isPrivate numFiles owner size activeWebhooks ymlContent __typename } }',
         variables : {
-          "repoName": param
+          "owner": owner,
+          "name": name
         }
       };
       return fetch('http://localhost:4000/', {
@@ -53,7 +54,7 @@ export class ApiServiceService {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          return data?.data.repoDetails;
+          return data?.data.repositoryDetails;
         })
         .catch((error) => {
           console.error(error);

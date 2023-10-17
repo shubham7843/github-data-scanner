@@ -21,7 +21,7 @@
                     <p>
                         <span><b>Owner - </b> {{data.owner}}</span><br>
                     </p>
-                    <a href="#" (click)="getRepoDetailsByGraphql(data.name)">Click here for more details</a>
+                    <a href="#" (click)="getRepoDetailsByGraphql(data.owner,data.name)">Click here for more details</a>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
             </div>				
         
             <div class="col-md-12">
-                <input class="repo-field" type="text" placeholder="Repository Private" value="Repo Type - {{completeRepoDetails?.private ? 'Private' : 'Public'}} " readonly="">
+                <input class="repo-field" type="text" placeholder="Repository Private" value="Repo Type - {{completeRepoDetails?.isPrivate ? 'Private' : 'Public'}} " readonly="">
             </div>
                         
             <div class="col-md-12">
@@ -46,11 +46,11 @@
             </div>
                         
             <div class="col-md-12">
-                <input class="repo-field" type="text" placeholder="Hooks Url" value="Repo Hook Active - {{completeRepoDetails?.hooks_url ? 'Yes' : 'No'}}" readonly="">
+                <input class="repo-field" type="text" placeholder="Hooks Url" value="Repo Hook Active - {{completeRepoDetails?.activeWebhooks ? 'Yes' : 'No'}}" readonly="">
             </div>
 
             <div class="col-md-12">
-                <input class="repo-field" type="text" placeholder="Number of files in the repo" value="No Of Files - {{completeRepoDetails?.fileCount}}" readonly="">
+                <input class="repo-field" type="text" placeholder="Number of files in the repo" value="No Of Files - {{completeRepoDetails?.numFiles}}" readonly="">
             </div>
         
             <div class="col-md-12">

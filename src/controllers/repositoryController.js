@@ -1,5 +1,8 @@
 const { Repository } = require('../models/repository');
 const axios = require('axios');
+var promiseLimit = require('promise-limit')
+var limit = promiseLimit(2)
+
 require('dotenv').config();
 
 const getRepositories = async () => {
@@ -13,12 +16,12 @@ const getRepositories = async () => {
 
     const repositories = await Promise.all(
       response.data.map(repo => {
-        return new Repository(
+        return limit(() => new Repository(
           repo.name,
           repo.size,
           repo.owner.login,
           repo.private
-        )
+        ));
       })
     );
 

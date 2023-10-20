@@ -8,7 +8,7 @@ require('dotenv').config();
 const getRepositories = async () => {
   try {
     // Fetch data from GitHub API and create Repository instances
-    const response = await axios.get('https://api.github.com/user/repos', {
+    const response = await axios.get(process.env.USER_REPOS, {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
@@ -34,7 +34,7 @@ const getRepositories = async () => {
 
 const getRepositoryDetails = async (owner, name) => {
   try {
-    const response = await axios.get(`https://api.github.com/repos/${owner}/${name}`, {
+    const response = await axios.get(`${process.env.REPO_URL}/${owner}/${name}`, {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
@@ -44,7 +44,7 @@ const getRepositoryDetails = async (owner, name) => {
 
     // Function to recursively scan for YAML files
     const scanForYamlFiles = async (path) => {
-      const filesResponse = await axios.get(`https://api.github.com/repos/${owner}/${name}/contents/${path}`, {
+      const filesResponse = await axios.get(`${process.env.REPO_URL}/${owner}/${name}/contents/${path}`, {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         },
@@ -78,7 +78,7 @@ const getRepositoryDetails = async (owner, name) => {
 
 
     // Fetch number of files
-    const noOfFiles = await axios.get(`https://api.github.com/repos/${owner}/${name}/contents`, {
+    const noOfFiles = await axios.get(`${process.env.REPO_URL}/${owner}/${name}/contents`, {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
@@ -87,7 +87,7 @@ const getRepositoryDetails = async (owner, name) => {
     const numFiles = noOfFiles.data.length;
 
     // Fetch active webhooks
-    const webhooksResponse = await axios.get(`https://api.github.com/repos/${owner}/${name}/hooks`, {
+    const webhooksResponse = await axios.get(`${process.env.REPO_URL}/${owner}/${name}/hooks`, {
       headers: {
         Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },

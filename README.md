@@ -1,4 +1,4 @@
-# gitscanner
+# github-data-scanner
 
 Steps to run the code:
 1. Clone the code from main branch git clone <url>

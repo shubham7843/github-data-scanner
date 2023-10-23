@@ -1,4 +1,5 @@
-const { getRepositories, getRepositoryDetails } = require('../controllers/repositoryController');
+const { getRepositories } = require('../controllers/repositoryController');
+const { getRepositoryDetails } = require('../controllers/repositoryDetailsController');
 
 module.exports = {
   resolvers: {
